@@ -1,0 +1,419 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ResQLink | Emergency Response</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        <span class="logo-icon">🚨</span>
+        <span>ResQLink</span>
+    </div>
+
+    <div class="tagline">
+        Emergency Response & Live Tracking
+    </div>
+
+</header>
+
+
+<main class="container">
+
+    <section class="hero">
+
+        <div class="hero-icon">
+            🚑
+        </div>
+
+        <h1>ResQLink</h1>
+
+        <h2>Emergency Response System</h2>
+
+        <p>
+            Select your emergency, share your location,
+            and track the emergency service in real time.
+        </p>
+
+    </section>
+
+
+    <!-- EMERGENCY REQUEST -->
+
+    <section class="card">
+
+        <h2>🚨 Request Emergency Service</h2>
+
+        <div class="form-group">
+
+            <label for="emergencyType">
+                Select Emergency Type
+            </label>
+
+            <select id="emergencyType">
+
+                <option value="">
+                    -- Select Emergency --
+                </option>
+
+                <option value="Medical">
+                    🏥 Medical Emergency
+                </option>
+
+                <option value="Accident">
+                    🚗 Road Accident
+                </option>
+
+                <option value="Fire">
+                    🔥 Fire Emergency
+                </option>
+
+                <option value="Flood">
+                    🌊 Flood / Water Rescue
+                </option>
+
+                <option value="Police">
+                    👮 Police Emergency
+                </option>
+
+                <option value="Rescue">
+                    🆘 Rescue / Trapped Person
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="location">
+                📍 Enter Your Location
+            </label>
+
+            <input
+                type="text"
+                id="location"
+                placeholder="Example: Ongole"
+            >
+
+        </div>
+
+
+        <button
+            type="button"
+            class="location-btn"
+            onclick="getCoordinates()"
+        >
+            📍 Get My Coordinates
+        </button>
+
+
+        <div class="coordinates">
+
+            <div>
+
+                <label>
+                    Latitude
+                </label>
+
+                <input
+                    type="text"
+                    id="latitude"
+                    readonly
+                    placeholder="Latitude"
+                >
+
+            </div>
+
+
+            <div>
+
+                <label>
+                    Longitude
+                </label>
+
+                <input
+                    type="text"
+                    id="longitude"
+                    readonly
+                    placeholder="Longitude"
+                >
+
+            </div>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="submit-btn"
+            onclick="submitEmergency()"
+        >
+            🚨 Send Emergency Request
+        </button>
+
+    </section>
+
+
+    <!-- ACCEPTED REQUEST -->
+
+    <section
+        id="acceptedSection"
+        class="card hidden"
+    >
+
+        <div class="accepted-header">
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+            <div>
+
+                <h2>Request Accepted</h2>
+
+                <p>
+                    ResQLink has assigned an emergency service.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- SERVICE DETAILS -->
+
+        <div class="service-details">
+
+            <div class="detail-box">
+
+                <span>
+                    Emergency
+                </span>
+
+                <strong id="selectedEmergency">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <span>
+                    Assigned Service
+                </span>
+
+                <strong id="serviceName">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <span>
+                    Priority
+                </span>
+
+                <strong id="priority">
+                    -
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- LOCATION -->
+
+        <div class="location-section">
+
+            <h3>
+                📍 ResQLink Live Location Tracking
+            </h3>
+
+
+            <div class="location-grid">
+
+                <div class="location-card user-location">
+
+                    <h4>👤 Your Location</h4>
+
+                    <p>
+                        Latitude:
+                        <strong id="userLat">
+                            -
+                        </strong>
+                    </p>
+
+                    <p>
+                        Longitude:
+                        <strong id="userLng">
+                            -
+                        </strong>
+                    </p>
+
+                </div>
+
+
+                <div class="location-card service-location">
+
+                    <h4>🚑 Service Location</h4>
+
+                    <p>
+                        Latitude:
+                        <strong id="currentServiceLat">
+                            -
+                        </strong>
+                    </p>
+
+                    <p>
+                        Longitude:
+                        <strong id="currentServiceLng">
+                            -
+                        </strong>
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- TRACKING -->
+
+        <div class="tracking-panel">
+
+            <div class="tracking-header">
+
+                <span>
+                    🚑 Emergency service is on the way
+                </span>
+
+                <span
+                    id="trackingStatus"
+                    class="live"
+                >
+                    ● LIVE
+                </span>
+
+            </div>
+
+
+            <div class="route-line">
+
+                <div class="route-point start">
+                    🚑
+                </div>
+
+                <div class="route-track">
+
+                    <div
+                        id="routeProgress"
+                        class="route-progress"
+                    ></div>
+
+                </div>
+
+                <div class="route-point destination">
+                    📍
+                </div>
+
+            </div>
+
+
+            <div class="tracking-values">
+
+                <div>
+
+                    <span>
+                        📏 Distance Remaining
+                    </span>
+
+                    <strong id="distance">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        ⏱ Estimated Arrival
+                    </span>
+
+                    <strong id="eta">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        🚑 Service
+                    </span>
+
+                    <strong id="trackingService">
+                        -
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ARRIVED -->
+
+        <div
+            id="arrivedMessage"
+            class="arrived hidden"
+        >
+
+            🎉 ResQLink emergency service has arrived!
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <strong>ResQLink</strong>
+
+    <p>
+        Smart Emergency Response & Live Tracking
+    </p>
+
+    <small>
+        Prototype © 2026
+    </small>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
+```

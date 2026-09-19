@@ -1,0 +1,43 @@
+[
+    {
+        "name": "ResQLink Ambulance 01",
+        "type": "Medical",
+        "latitude": 15.5150,
+        "longitude": 80.0400
+    },
+
+    {
+        "name": "ResQLink Ambulance 02",
+        "type": "Accident",
+        "latitude": 15.4950,
+        "longitude": 80.0600
+    },
+
+    {
+        "name": "ResQLink Fire & Rescue 01",
+        "type": "Fire",
+        "latitude": 15.5100,
+        "longitude": 80.0550
+    },
+
+    {
+        "name": "ResQLink Flood Rescue 01",
+        "type": "Flood",
+        "latitude": 15.5200,
+        "longitude": 80.0350
+    },
+
+    {
+        "name": "ResQLink Police Unit 01",
+        "type": "Police",
+        "latitude": 15.5000,
+        "longitude": 80.0700
+    },
+
+    {
+        "name": "ResQLink Rescue Team 01",
+        "type": "Rescue",
+        "latitude": 15.5250,
+        "longitude": 80.0450
+    }
+]
